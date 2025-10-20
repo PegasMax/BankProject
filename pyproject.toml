@@ -1,0 +1,54 @@
+[project]
+name = "bankproject"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Your Name",email = "you@example.com"}
+]
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+lint = [
+    "flake8 (>=7.3.0,<8.0.0)",
+    "black (>=25.9.0,<26.0.0)",
+    "isort (>=7.0.0,<8.0.0)",
+    "mypy (>=1.18.2,<2.0.0)"
+]
+
+
+ [tool.black]
+ # Максимальная лина строки
+ line-length = 119
+ # Файлы, которые не нужно форматировать
+ exclude = '''
+ (
+   /(
+       \.eggs
+      |\.git
+      |\.hg
+      |\.mypy_cache
+      |\.venv
+   )/
+   |foo.py
+ )
+ '''
+
+
+[tool.isort]
+# Максимальная длина строки
+line_length = 119
+
+
+[tool.mypy]
+disallow_untyped_defs = true # Запрещает объявлять ф-ии без аннотации типов
+no_implicit_optional = true # Аргументы не могут быть None
+warn_return_any = true # Предупреждает, если возвращается Any
+exclude = 'venv'
