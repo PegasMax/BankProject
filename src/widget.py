@@ -14,5 +14,14 @@ def mask_account_or_card(type_and_number_string: str) -> str:
     return " ".join(list_of_data)
 
 
-#if __name__ == "__main__":
-#    print(mask_account_or_card("Счет 64686473678894779589"))
+def get_date(unformatted_date: str) -> str:
+    """Приводит дату к формату 'ДД.ММ.ГГГГ'"""
+    cropped_date = unformatted_date[:10]
+    cropped_date_in_list = cropped_date.split("-")
+    formatted_date = ".".join(cropped_date_in_list[::-1])
+
+    return formatted_date
+
+
+if __name__ == "__main__":
+    print(get_date("2024-03-11T02:26:18.671407"))
