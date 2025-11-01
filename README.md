@@ -89,7 +89,7 @@ Visa Platinum 7000 79** **** 6361  # выход функции
 
 и
 
-`get_date(unformatted_date)` - Приводит дату к формату 'ДД.ММ.ГГГГ
+`get_date(unformatted_date)` - Приводит дату к формату 'ДД.ММ.ГГГГ'
 
 Пример входных и выходных данных:
 ```commandline
