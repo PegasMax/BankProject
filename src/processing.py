@@ -6,6 +6,8 @@ def filter_by_state(list_of_dicts: list[dict], needed_state: str = "EXECUTED") -
     list_for_result = []
 
     for dictionary in list_of_dicts:
+        if not "state" in dictionary:
+            continue
         if dictionary["state"] == needed_state:
             list_for_result.append(dictionary)
 

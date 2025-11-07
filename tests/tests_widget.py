@@ -49,7 +49,8 @@ def test_mask_account_card_without_number(brand):
         mask_account_card(brand + " ")
         assert str(exc_info.value) == "Введите номер карты или счета"
 
-    # Тестирование функции get_date
+
+#       Тестирование функции get_date
 
 
 def test_get_date():
