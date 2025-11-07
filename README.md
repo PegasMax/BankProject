@@ -7,13 +7,8 @@
 - [Установка](#Установка)
 - [Использование](#Использование)
 - [Функции](#Функции)
-- [Technologies](#technologies)
-- [Features](#features)
-- [Contributing](#contributing)
-- [Contributors](#contributors)
 - [Author](#author)
-- [Change log](#change-log)
-- [License](#license)
+
 
 ## Установка
 

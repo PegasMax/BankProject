@@ -13,12 +13,12 @@ from src.widget import mask_account_card, get_date
         "Visa Gold",
     ],
 )
-def test_mask_account_card_for_card(brand, call_card_number):
+def test_mask_account_card_for_card(brand: str, call_card_number: list[str]) -> None:
     assert mask_account_card(brand + " " + call_card_number[0]) == brand + " " + call_card_number[1]
 
 
 @pytest.mark.parametrize("brand", ["Счёт", "Счет", "счет", "счёт", "СЧЁТ", "СЧЕТ", "СчЁт", "СчЕт"])
-def test_mask_account_card_for_account(brand, call_account_number):
+def test_mask_account_card_for_account(brand: str, call_account_number: list[str]) -> None:
     assert mask_account_card(brand + " " + call_account_number[0]) == "Счет " + call_account_number[1]
 
 
@@ -26,7 +26,7 @@ def test_mask_account_card_for_account(brand, call_account_number):
     "first_part_of_message, number",
     [(" ", "12345678901234567890"), ("", "12345678901234567890"), (" ", "1234567890123456"), ("", "1234567890123456")],
 )
-def test_mask_account_card_without_type_of_number(first_part_of_message, number):
+def test_mask_account_card_without_type_of_number(first_part_of_message: str, number: str) -> None:
     with pytest.raises(ValueError) as exc_info:
         mask_account_card(first_part_of_message + number)
 
@@ -44,7 +44,7 @@ def test_mask_account_card_without_type_of_number(first_part_of_message, number)
         "Visa Gold ",
     ],
 )
-def test_mask_account_card_without_number(brand):
+def test_mask_account_card_without_number(brand: str) -> None:
     with pytest.raises(ValueError) as exc_info:
         mask_account_card(brand + " ")
         assert str(exc_info.value) == "Введите номер карты или счета"
@@ -53,7 +53,7 @@ def test_mask_account_card_without_number(brand):
 #       Тестирование функции get_date
 
 
-def test_get_date():
+def test_get_date() -> None:
     assert get_date("2024-03-11T02:26:18.671407") == "11.03.2024"
 
 
@@ -67,7 +67,7 @@ def test_get_date():
         ("224-03-11T02:26:18.671407", "11.03.224"),
     ],
 )
-def test_get_date_different_real_dates(source_date, expected_result):
+def test_get_date_different_real_dates(source_date: str, expected_result: str) -> None:
     assert get_date(source_date) == expected_result
 
 
@@ -81,7 +81,7 @@ def test_get_date_different_real_dates(source_date, expected_result):
         "224-03-51T02:26:18.671407",
     ],
 )
-def test_get_date_unreal_dates(source_date):
+def test_get_date_unreal_dates(source_date: str) -> None:
     with pytest.raises(ValueError) as e_info:
         get_date(source_date)
         assert str(e_info.value) == "Введена несуществующая дата"
@@ -99,7 +99,7 @@ def test_get_date_unreal_dates(source_date):
         " ",
     ],
 )
-def test_get_date_no_dates(source_date):
+def test_get_date_no_dates(source_date: str) -> None:
     with pytest.raises(ValueError) as e_info:
         get_date(source_date)
         assert str(e_info.value) == "Дата не введена в корректном формате"

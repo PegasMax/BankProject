@@ -6,7 +6,7 @@ from src.masks import get_mask_card_number, get_mask_account
 #       Тестируем функцию get_mask_card_number(card_number)
 
 
-def test_get_mask_card_number_basic():
+def test_get_mask_card_number_basic() -> None:
     assert get_mask_card_number("2022568749152356") == "2022 56** **** 2356"
 
 
@@ -22,11 +22,11 @@ def test_get_mask_card_number_basic():
         "1234 5678 90123456",
     ],
 )
-def test_get_mask_card_number_different_formats(card_number):
+def test_get_mask_card_number_different_formats(card_number: str | int) -> None:
     assert get_mask_card_number(card_number) == "1234 56** **** 3456"
 
 
-def test_get_mask_card_number_zero_first():
+def test_get_mask_card_number_zero_first() -> None:
     assert get_mask_card_number("0012345678903456") == "0012 34** **** 3456"
 
 
@@ -44,7 +44,7 @@ def test_get_mask_card_number_zero_first():
         "-",
     ],
 )
-def test_get_mask_card_number_wrong_length(card_number):
+def test_get_mask_card_number_wrong_length(card_number: str | int) -> None:
     with pytest.raises(ValueError) as exc_info:
         get_mask_card_number(card_number)
         assert (
@@ -63,9 +63,9 @@ def test_get_mask_card_number_wrong_length(card_number):
         "1234*&4890123456",
         "l234567890123456",
         "12345678`0123456",
-    ]
+    ],
 )
-def test_get_mask_card_number_other_symbols(card_number):
+def test_get_mask_card_number_other_symbols(card_number: str | int) -> None:
     with pytest.raises(ValueError) as exc_info:
         get_mask_card_number(card_number)
         assert str(exc_info.value) == "Номер карты может состоять только из цифр"
@@ -74,14 +74,8 @@ def test_get_mask_card_number_other_symbols(card_number):
 #       Тестируем функцию get_mask_account(account_number)
 
 
-@pytest.mark.parametrize(
-    "account_number",
-    [
-        "73654108430135874305",
-        73654108430135874305
-    ]
-)
-def test_get_mask_account_basic(account_number):
+@pytest.mark.parametrize("account_number", ["73654108430135874305", 73654108430135874305])
+def test_get_mask_account_basic(account_number: str | int) -> None:
     assert get_mask_account(account_number) == "**4305"
 
 
@@ -97,28 +91,26 @@ def test_get_mask_account_basic(account_number):
         "123004 567008 90127-890",
     ],
 )
-def test_get_mask_account_different_formats(account_number):
+def test_get_mask_account_different_formats(account_number: str | int) -> None:
     assert get_mask_account(account_number) == "**7890"
 
 
 @pytest.mark.parametrize(
     "account_number",
-    [
-        12345678901234567890,
-        "12345678901234567890",
-        "12345678901237890",
-        "123456789012345678901234567890"
-    ],
+    [12345678901234567890, "12345678901234567890", "12345678901237890", "123456789012345678901234567890"],
 )
-def test_get_mask_account_different_length(account_number):
+def test_get_mask_account_different_length(account_number: str | int) -> None:
     assert get_mask_account(account_number) == "**7890"
 
 
 @pytest.mark.parametrize("account_number", [890, "890", " ", ""])
-def test_get_mask_account_different_formats(account_number):
+def test_get_mask_account_little_length(account_number: str | int) -> None:
     with pytest.raises(ValueError) as exc_info:
         get_mask_account(account_number)
-        assert str(exc_info.value) == "Обычно номер счета содержит 20 цифр, проверьте корректность введенного номера счета"
+        assert (
+            str(exc_info.value)
+            == "Обычно номер счета содержит 20 цифр, проверьте корректность введенного номера счета"
+        )
 
 
 @pytest.mark.parametrize(
@@ -131,9 +123,9 @@ def test_get_mask_account_different_formats(account_number):
         "12341234*&4890123456",
         "l2341234567890123456",
         "123412345678`0123456",
-    ]
+    ],
 )
-def test_get_mask_account_other_symbols(account_number):
+def test_get_mask_account_other_symbols(account_number: str | int) -> None:
     with pytest.raises(ValueError) as exc_info:
         get_mask_card_number(account_number)
         assert str(exc_info.value) == "Номер карты может состоять только из цифр"
