@@ -30,7 +30,7 @@ def card_number_generator(start_number, finish_number) -> iter(str):
         # Дополняем номер карты разделителями
         for i, x in enumerate(result_str):
             result_with_spaces += x
-            if i + 1 % 4 == 0 and i !=16:
+            if (i + 1) % 4 == 0 and i + 1 !=16:
                 result_with_spaces += " "
 
         yield result_with_spaces
