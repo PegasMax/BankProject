@@ -28,12 +28,10 @@ def card_number_generator(start_number: int, finish_number: int) -> Generator[st
 
         # При необходимости добавляем нолики в начало номера карты
         result_str = "0" * (16 - len(number_str)) + number_str
-        result_with_spaces = ""
 
         # Дополняем номер карты разделителями
-        for i, x in enumerate(result_str):
-            result_with_spaces += x
-            if (i + 1) % 4 == 0 and i + 1 != 16:
-                result_with_spaces += " "
+        result_list = [x + " " if ((i + 1) % 4 == 0 and i != 15) else x for i, x in enumerate(result_str)]
+
+        result_with_spaces = ''.join(result_list)
 
         yield result_with_spaces
