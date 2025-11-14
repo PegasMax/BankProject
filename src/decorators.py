@@ -23,6 +23,8 @@ def log(filename: str = ""):
 
             print_to_file_or_console(f"start of executing {func.__name__}", filename)
 
+            result = None
+
             try:
                 result = func(*args, **kwargs)
             except Exception as e:
@@ -34,7 +36,7 @@ def log(filename: str = ""):
                 print_to_file_or_console(text, filename)
 
             print_to_file_or_console(f"finish of executing {func.__name__}", filename)
-            return func
+            return result
 
         return inner
 
