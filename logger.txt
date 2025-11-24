@@ -1,0 +1,3 @@
+start of executing adding_function
+adding_function error: <class 'TypeError'>. Inputs: (3, 'string'), {}
+finish of executing adding_function
