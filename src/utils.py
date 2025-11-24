@@ -1,14 +1,14 @@
 import json
 
-from src.external_api import convert_valute
+from src.external_api import convert_amount_to_rub
 
 
 def get_transactions_from_json_file(path: str) -> list[dict]:
-    '''Принимает на вход путь до JSON-файла и возвращает список словарей с данными о финансовых транзакциях.
-    Если файл пустой, содержит не список или не найден, функция возвращает пустой список'''
+    """Принимает на вход путь до JSON-файла и возвращает список словарей с данными о финансовых транзакциях.
+    Если файл пустой, содержит не список или не найден, функция возвращает пустой список"""
     result_list = None
 
-    #Проверки и исключения
+    # Проверки и исключения
     try:
         with open(path) as file:
             try:
@@ -18,20 +18,22 @@ def get_transactions_from_json_file(path: str) -> list[dict]:
     except FileNotFoundError:
         return []
 
-    if type(result_list) != list:
+    if type(result_list) is not list:
         return []
 
     return result_list
 
 
 def get_transaction_amount_rub(transaction: dict) -> float:
-    '''Принимает на вход транзакцию и возвращает сумму транзакции (amount) в рублях, тип данных — float.
+    """Принимает на вход транзакцию и возвращает сумму транзакции (amount) в рублях, тип данных — float.
     Если транзакция была в USD или EUR, происходит обращение к внешнему API для получения текущего курса валют
-    и конвертации суммы операции в рубли'''
+    и конвертации суммы операции в рубли"""
 
-    result = float(transaction['operationAmount']['amount'])
+    result = float(transaction["operationAmount"]["amount"])
 
-    if transaction['operationAmount']['currency']['code'] == 'RUB':
+    if transaction["operationAmount"]["currency"]["code"] == "RUB":
         return round(float(result), 2)
+    elif transaction["operationAmount"]["currency"]["code"] in ["USD", "EUR"]:
+        return round(convert_amount_to_rub(transaction), 2)
     else:
-        return convert_valute(result, transaction['operationAmount']['currency']['code'], 'RUB')
+        return 0

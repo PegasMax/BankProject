@@ -13,6 +13,7 @@ def print_to_file_or_console(text: str, filename: str = "") -> None:
 def log(filename: str = ""):
     """Декоратор, который логирует начало, результат и конец выполнения функции
     в файл(если указано имя файла) или в консоль"""
+
     def wrapper(func):
         @wraps(func)
         def inner(*args, **kwargs) -> object:
