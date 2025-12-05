@@ -1,6 +1,10 @@
 import pytest
 
-from src.generators import card_number_generator, filter_by_currency, transaction_descriptions
+from src.generators import (
+    card_number_generator,
+    filter_by_currency,
+    transaction_descriptions,
+)
 from tests.conftest import call_transactions_list
 
 # Тестирование функции filter_by_currency
@@ -21,7 +25,10 @@ def test_filter_by_currency_basic(call_transactions_list: dict):
 
 def test_filter_by_currency_upset(call_transactions_list: dict):
     """Проверка отработки ситуации когда требуемая валюта отсутствует"""
-    assert list(filter_by_currency(call_transactions_list["all_transactions"], "EUR")) == []
+    assert (
+        list(filter_by_currency(call_transactions_list["all_transactions"], "EUR"))
+        == []
+    )
 
 
 def test_filter_by_currency_empty_list():
@@ -79,11 +86,18 @@ def test_card_number_generator_basic(start_number, finish_number, expected_resul
 @pytest.mark.parametrize(
     "start_number, finish_number, expected_first, expected_last",
     [
-        (2200404533221000, 2200404533221010, "2200 4045 3322 1000", "2200 4045 3322 1010"),
+        (
+            2200404533221000,
+            2200404533221010,
+            "2200 4045 3322 1000",
+            "2200 4045 3322 1010",
+        ),
         (1, 1000000, "0000 0000 0000 0001", "0000 0000 0100 0000"),
     ],
 )
-def test_card_number_generator_extreme(start_number, finish_number, expected_first, expected_last):
+def test_card_number_generator_extreme(
+    start_number, finish_number, expected_first, expected_last
+):
     """Проверка корректности крайних значений диапазона"""
     card_generator = card_number_generator(start_number, finish_number)
 

@@ -20,7 +20,13 @@ def get_mask_card_number(card_number: int | str) -> str:
 
     mask_card_number = card_number_str[:6] + 6 * "*" + card_number_str[-4:]
     mask_card_number = (
-        mask_card_number[:4] + " " + mask_card_number[4:8] + " " + mask_card_number[8:12] + " " + mask_card_number[12:]
+        mask_card_number[:4]
+        + " "
+        + mask_card_number[4:8]
+        + " "
+        + mask_card_number[8:12]
+        + " "
+        + mask_card_number[12:]
     )
 
     return mask_card_number
@@ -37,7 +43,9 @@ def get_mask_account(account_number: int | str) -> str:
 
     # Проверка наличия в номере счета хотя бы 4х цифр
     if len(account_number_str) < 4:
-        raise ValueError("Обычно номер счета содержит 20 цифр, проверьте корректность введенного номера счета")
+        raise ValueError(
+            "Обычно номер счета содержит 20 цифр, проверьте корректность введенного номера счета"
+        )
 
     mask_account = "**" + account_number_str[-4:]
 
