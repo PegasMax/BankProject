@@ -13,17 +13,35 @@ def convert_amount_to_rub(transaction: dict) -> float:
     amount = transaction["operationAmount"]["amount"]
     source = transaction["operationAmount"]["currency"]["code"]
 
-    url = "https://api.apilayer.com/currency_data/convert"
+    url = f'https://api.apilayer.com/exchangerates_data/convert?to=RUB&from={source}&amount={amount}'
+
+    payload = {}
 
     headers = {"apikey": API_KEY}
 
-    payload = {"amount": amount, "from": source, "to": "RUB"}
-
-    response = requests.get(url, headers=headers, params=payload)
+    response = requests.request("GET",url, headers=headers, data=payload)
 
     if response.status_code == 200:
-        result_json = json.loads(response.json())
+        result_json = json.loads(response.text)
         amount = result_json["result"]
         return float(amount)
     else:
         return 0
+
+
+usd_transaction = {
+            "id": 939719570,
+            "state": "EXECUTED",
+            "date": "2018-06-30T02:08:58.425572",
+            "operationAmount": {
+                "amount": "9824.07",
+                "currency": {
+                    "name": "USD",
+                    "code": "USD"
+                }
+            },
+            "description": "Перевод организации",
+            "from": "Счет 75106830613657916952",
+            "to": "Счет 11776614605963066702"
+        }
+print(convert_amount_to_rub(usd_transaction))

@@ -80,7 +80,7 @@ def test_get_transaction_amount_rub_usd_or_eur(coll_usd_transaction):
     """Тестирование вызова ф-ии конвертации при получении долларовой
     или евро операции на вход"""
     mock_convert = Mock(return_value=713.8)
-    src.external_api.rub_conversion = mock_convert
+    src.external_api.convert_amount_to_rub = mock_convert
     assert get_transaction_amount_rub(coll_usd_transaction) == 713.8
 
 
