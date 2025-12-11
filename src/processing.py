@@ -1,4 +1,6 @@
-def filter_by_state(list_of_dicts: list[dict], needed_state: str = "EXECUTED") -> list[dict]:
+def filter_by_state(
+    list_of_dicts: list[dict], needed_state: str = "EXECUTED"
+) -> list[dict]:
     """Функция, принимающая список словарей и возвращающая новый список словарей,
     состоящий из словарей старого списка, у которых параметр state соответствует полученному
     параметру"""
