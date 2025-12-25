@@ -8,9 +8,7 @@ def mask_account_card(type_and_number_string: str) -> str:
 
     # Проверка наличия только номера
     if len(list_of_data) < 2 and list_of_data[-1][-1].isdigit():
-        raise ValueError(
-            'Введен только номер, впишите тип карты или слово "Счет" в начало сообщения'
-        )
+        raise ValueError('Введен только номер, впишите тип карты или слово "Счет" в начало сообщения')
 
     # Проверка отсутствия в сообщении номера
     if not list_of_data[-1][-1].isdigit():
