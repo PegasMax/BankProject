@@ -39,9 +39,7 @@ from tests.conftest import call_operations
         ),
     ],
 )
-def test_filter_by_state(
-    call_operations: list[dict], state: str, expected_result: list[dict]
-) -> None:
+def test_filter_by_state(call_operations: list[dict], state: str, expected_result: list[dict]) -> None:
     assert filter_by_state(call_operations, state) == expected_result
 
 
@@ -53,9 +51,7 @@ def test_filter_by_state_default_state(call_operations: list[dict]) -> None:
 
 
 @pytest.mark.parametrize("state", ["EXECUTED", "CANCELED", ""])
-def test_filter_by_state_without_state(
-    call_empty_operations: list[dict], state: str
-) -> None:
+def test_filter_by_state_without_state(call_empty_operations: list[dict], state: str) -> None:
     assert filter_by_state(call_empty_operations, state) == []
 
 
@@ -117,9 +113,7 @@ def test_filter_by_state_without_state(
         ),
     ],
 )
-def test_sort_by_date_basic(
-    call_operations: list[dict], order: bool, expected_result: list[dict]
-) -> None:
+def test_sort_by_date_basic(call_operations: list[dict], order: bool, expected_result: list[dict]) -> None:
     assert sort_by_date(call_operations, order) == expected_result
 
 
@@ -232,7 +226,5 @@ def test_sort_by_date_not_unique_dates() -> None:
         ),
     ],
 )
-def test_sort_by_date_wrong_data(
-    source_data: list[dict], expected_result: list[dict]
-) -> None:
+def test_sort_by_date_wrong_data(source_data: list[dict], expected_result: list[dict]) -> None:
     assert sort_by_date(source_data) == expected_result

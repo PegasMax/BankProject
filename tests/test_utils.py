@@ -87,8 +87,6 @@ def test_get_transaction_amount_rub_usd_or_eur(coll_usd_transaction):
 def test_get_transaction_amount_rub_strange_valute():
     """Тестирование вызова ф-ии конвертации при получении операции
     в непредусмотренной валюте на вход"""
-    transaction_invalid = {
-        "operationAmount": {"amount": 100.00, "currency": {"code": "JPY"}}
-    }
+    transaction_invalid = {"operationAmount": {"amount": 100.00, "currency": {"code": "JPY"}}}
     result = get_transaction_amount_rub(transaction_invalid)
     assert result == 0.00

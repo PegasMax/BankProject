@@ -73,9 +73,7 @@ def test_get_mask_card_number_other_symbols(card_number: str | int) -> None:
 #       Тестируем функцию get_mask_account(account_number)
 
 
-@pytest.mark.parametrize(
-    "account_number", ["73654108430135874305", 73654108430135874305]
-)
+@pytest.mark.parametrize("account_number", ["73654108430135874305", 73654108430135874305])
 def test_get_mask_account_basic(account_number: str | int) -> None:
     assert get_mask_account(account_number) == "**4305"
 

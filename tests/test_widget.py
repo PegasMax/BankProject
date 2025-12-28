@@ -14,22 +14,12 @@ from src.widget import get_date, mask_account_card
     ],
 )
 def test_mask_account_card_for_card(brand: str, call_card_number: list[str]) -> None:
-    assert (
-        mask_account_card(brand + " " + call_card_number[0])
-        == brand + " " + call_card_number[1]
-    )
+    assert mask_account_card(brand + " " + call_card_number[0]) == brand + " " + call_card_number[1]
 
 
-@pytest.mark.parametrize(
-    "brand", ["Счёт", "Счет", "счет", "счёт", "СЧЁТ", "СЧЕТ", "СчЁт", "СчЕт"]
-)
-def test_mask_account_card_for_account(
-    brand: str, call_account_number: list[str]
-) -> None:
-    assert (
-        mask_account_card(brand + " " + call_account_number[0])
-        == "Счет " + call_account_number[1]
-    )
+@pytest.mark.parametrize("brand", ["Счёт", "Счет", "счет", "счёт", "СЧЁТ", "СЧЕТ", "СчЁт", "СчЕт"])
+def test_mask_account_card_for_account(brand: str, call_account_number: list[str]) -> None:
+    assert mask_account_card(brand + " " + call_account_number[0]) == "Счет " + call_account_number[1]
 
 
 @pytest.mark.parametrize(
@@ -41,16 +31,11 @@ def test_mask_account_card_for_account(
         ("", "1234567890123456"),
     ],
 )
-def test_mask_account_card_without_type_of_number(
-    first_part_of_message: str, number: str
-) -> None:
+def test_mask_account_card_without_type_of_number(first_part_of_message: str, number: str) -> None:
     with pytest.raises(ValueError) as exc_info:
         mask_account_card(first_part_of_message + number)
 
-        assert (
-            str(exc_info.value)
-            == 'Введен только номер, впишите тип карты или слово "Счет" в начало сообщения'
-        )
+        assert str(exc_info.value) == 'Введен только номер, впишите тип карты или слово "Счет" в начало сообщения'
 
 
 @pytest.mark.parametrize(
