@@ -214,6 +214,70 @@ some_text_to_file  # содержимое файла logger.txt
 `log(filename = "")` -Декоратор, который логирует начало, результат и конец выполнения 
 функции в файл(если указано имя файла) или в консоль
 
+### Модуль table_integration.py
+Модуль содержит функции:
+
+`get_transactions_from_csv_file(path: str)` - Принимает адрес .CSV-файла и считывает изх него список транзакций. Возвращает список словарей, представляющих транзакции
+
+Пример использования функции:
+```commandline
+csv_transactions = get_transactions_from_csv_file("../data/transactions.csv")
+print(csv_transactions)
+
+# Входные данные
+id;state;date;amount;currency_name;currency_code;from;to;description
+650703;EXECUTED;2023-09-05T11:30:32Z;16210;Sol;PEN;Счет 58803664561298323391;Счет 39745660563456619397;Перевод организации
+3598919;EXECUTED;2020-12-06T23:00:58Z;29740;Peso;COP;Discover 3172601889670065;Discover 0720428384694643;Перевод с карты на карту
+...
+
+# Выход функции
+[{'id': 650703.0, 'state': 'EXECUTED', 'date': '2023-09-05T11:30:32Z', 'operationAmount': {'amount': 16210.0, 'currency': {'name': 'Sol', 'code': 'PEN'}}, 'description': 'Перевод организации', 'from': 'Счет 58803664561298323391', 'to': 'Счет 39745660563456619397'}, {'id': 3598919.0, 'state': 'EXECUTED', 'date': '2020-12-06T23:00:58Z', 'operationAmount': {'amount': 29740.0, 'currency': {'name': 'Peso', 'code': 'COP'}}, 'description': 'Перевод с карты на карту', 'from': 'Discover 3172601889670065', 'to': 'Discover 0720428384694643'},
+...
+}]
+
+```
+
+`get_transactions_from_excel_file(path: str)` - Принимает адрес .xlsx-файла и считывает изх него список транзакций. Возвращает список словарей, представляющих транзакции
+
+Пример использования функции:
+```commandline
+excel_transactions = get_transactions_from_excel_file("../data/transactions_excel.xlsx")
+print(excel_transactions)
+
+# Входные данные
+Таблица с названиями столбцов:
+id, state, date, amount, currency_name, currency_code, from, to, description
+и соответствующими данными в столбцах
+...
+
+# Выход функции
+[{'id': 650703.0, 'state': 'EXECUTED', 'date': '2023-09-05T11:30:32Z', 'operationAmount': {'amount': 16210.0, 'currency': {'name': 'Sol', 'code': 'PEN'}}, 'description': 'Перевод организации', 'from': 'Счет 58803664561298323391', 'to': 'Счет 39745660563456619397'}, {'id': 3598919.0, 'state': 'EXECUTED', 'date': '2020-12-06T23:00:58Z', 'operationAmount': {'amount': 29740.0, 'currency': {'name': 'Peso', 'code': 'COP'}}, 'description': 'Перевод с карты на карту', 'from': 'Discover 3172601889670065', 'to': 'Discover 0720428384694643'},
+...
+}]
+```
+
+`standardize_df(df: pd.DataFrame)` - Принимает на вход DataFrame, полученный из табличных файлов и приводит его к стандартному виду, принятому в системе
+
+Пример использования функции:
+```commandline
+standard_df = standardize_df(df)
+print(standard_df.to_dict(orient='records')
+
+# Входные данные
+DataFrame, представленный в виде словарей для наглядности:
+[{'id': 650703.0, 'state': 'EXECUTED', 'date': '2023-09-05T11:30:32Z', 'amount': 16210.0, 'currency_name': 'Sol', 'currency_code': 'PEN', 'from': 'Счет 58803664561298323391', 'to': 'Счет 39745660563456619397', 'description': 'Перевод организации'}, 
+{'id': 3598919.0, 'state': 'EXECUTED', 'date': '2020-12-06T23:00:58Z', 'amount': 29740.0, 'currency_name': 'Peso', 'currency_code': 'COP', 'from': 'Discover 3172601889670065', 'to': 'Discover 0720428384694643', 'description': 'Перевод с карты на карту'},
+...
+}]
+
+# Выход функции
+[{'id': 650703.0, 'state': 'EXECUTED', 'date': '2023-09-05T11:30:32Z', 'operationAmount': {'amount': 16210.0, 'currency': {'name': 'Sol', 'code': 'PEN'}}, 'description': 'Перевод организации', 'from': 'Счет 58803664561298323391', 'to': 'Счет 39745660563456619397'}, 
+{'id': 3598919.0, 'state': 'EXECUTED', 'date': '2020-12-06T23:00:58Z', 'operationAmount': {'amount': 29740.0, 'currency': {'name': 'Peso', 'code': 'COP'}}, 'description': 'Перевод с карты на карту', 'from': 'Discover 3172601889670065', 'to': 'Discover 0720428384694643'}, 
+...
+}]
+```
+
+
 ## Тестирование
 Этот проект покрыт юнит-тестами на 97%. 
 Файлы с тестами располагаются в директории tests, запустить их можно при помощи пакета pytest.
