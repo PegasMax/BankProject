@@ -5,7 +5,6 @@ def filter_by_currency(transactions: list[dict], currency: str) -> Generator[dic
     """Принимает на вход список словарей, представляющих транзакции. Возвращает итератор,
     который поочередно выдает транзакции, где валюта операции соответствует заданной (например, USD)
     """
-
     for transaction in transactions:
         if transaction["operationAmount"]["currency"]["code"] == currency:
             yield transaction
@@ -13,7 +12,6 @@ def filter_by_currency(transactions: list[dict], currency: str) -> Generator[dic
 
 def transaction_descriptions(transactions: list[dict]) -> Generator[str]:
     """Принимает список словарей с транзакциями и возвращает описание каждой операции по очереди"""
-
     for transaction in transactions:
         yield transaction["description"]
 
@@ -23,7 +21,6 @@ def card_number_generator(start_number: int, finish_number: int) -> Generator[st
     где X — цифра номера карты.
     Генератор может сгенерировать номера карт в заданном диапазоне от 0000 0000 0000 0001 до 9999 9999 9999 9999.
     """
-
     for number in range(start_number, finish_number + 1):
 
         number_str = str(number)

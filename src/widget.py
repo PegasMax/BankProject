@@ -3,7 +3,7 @@ from src.masks import get_mask_account, get_mask_card_number
 
 def mask_account_card(type_and_number_string: str) -> str:
     """Выделяет из строки номер карты или счета и маскирует его"""
-    list_of_data = type_and_number_string.split()
+    list_of_data = str(type_and_number_string).split()
     masked_numbers = ""
 
     # Проверка наличия только номера
