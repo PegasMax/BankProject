@@ -4,7 +4,7 @@ from pytest_mock import mocker
 from src.table_integration import get_transactions_from_csv_file, get_transactions_from_excel_file
 
 
-def test_get_transactions_from_csv_file_ok():
+def test_get_transactions_from_csv_file_ok() -> None:
     """Тестирование вызова ф-ии получения информации из
     .csv файла в нормальных условиях"""
     result = get_transactions_from_csv_file("data/transactions.csv")[0]
@@ -19,27 +19,27 @@ def test_get_transactions_from_csv_file_ok():
     }
 
 
-def test_get_transactions_from_csv_file_not_existed_file():
+def test_get_transactions_from_csv_file_not_existed_file() -> None:
     """Тестирование вызова ф-ии получения информации из
     несуществующего .csv файла"""
     result = get_transactions_from_csv_file("data/not_existed.csv")
     assert result == []
 
 
-def test_get_transactions_from_csv_file_empty_file(mocker):
+def test_get_transactions_from_csv_file_empty_file(mocker) -> None:
     """Тестирование вызова ф-ии получения информации из пустого
     .csv файла"""
     mocker.patch("pandas.read_csv", return_value=None)
     assert get_transactions_from_csv_file("data/transactions_emptyes.csv") == []
 
 
-def test_get_transactions_from_csv_file_absent_file():
+def test_get_transactions_from_csv_file_absent_file() -> None:
     """Тестирование вызова ф-ии получения информации из пустого
     .csv файла"""
     assert get_transactions_from_csv_file("data/transactions_absent.csv") == []
 
 
-def test_get_transactions_from_excel_file_ok():
+def test_get_transactions_from_excel_file_ok() -> None:
     """Тестирование вызова ф-ии получения информации из
     .csv файла в нормальных условиях"""
     result = get_transactions_from_excel_file("data/transactions_excel.xlsx")[0]
@@ -54,21 +54,21 @@ def test_get_transactions_from_excel_file_ok():
     }
 
 
-def test_get_transactions_from_excel_file_not_existed_file():
+def test_get_transactions_from_excel_file_not_existed_file() -> None:
     """Тестирование вызова ф-ии получения информации из
     несуществующего .csv файла"""
     result = get_transactions_from_excel_file("data/not_existed.xlsx")
     assert result == []
 
 
-def test_get_transactions_from_excel_file_empty_file(mocker):
+def test_get_transactions_from_excel_file_empty_file(mocker) -> None:
     """Тестирование вызова ф-ии получения информации из пустого
     .csv файла"""
     mocker.patch("pandas.read_csv", return_value=None)
     assert get_transactions_from_excel_file("data/transactions_emptyes.xlsx") == []
 
 
-def test_get_transactions_from_excel_file_absent_file():
+def test_get_transactions_from_excel_file_absent_file() -> None:
     """Тестирование вызова ф-ии получения информации из пустого
     .csv файла"""
     assert get_transactions_from_excel_file("data/transactions_absent.xlsx") == []

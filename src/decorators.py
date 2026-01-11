@@ -10,7 +10,7 @@ def print_to_file_or_console(text: str, filename: str = "") -> None:
         print(text)
 
 
-def log(filename: str = ""):
+def log(filename: str = "") -> None:
     """Декоратор, который логирует начало, результат и конец выполнения функции
     в файл(если указано имя файла) или в консоль"""
 
