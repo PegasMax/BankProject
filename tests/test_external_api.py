@@ -4,7 +4,7 @@ from src.external_api import convert_amount_to_rub
 from tests.conftest import coll_usd_transaction
 
 
-def test_convert_amount_to_rub_usd(coll_usd_transaction: dict):
+def test_convert_amount_to_rub_usd(coll_usd_transaction: dict) -> None:
     """Тестирование функции в нормальных условиях
     при получении долларовой операции"""
     with patch("requests.request") as mock_get:
@@ -14,7 +14,7 @@ def test_convert_amount_to_rub_usd(coll_usd_transaction: dict):
         mock_get.assert_called()
 
 
-def test_convert_amount_to_rub_eur(coll_eur_transaction: dict):
+def test_convert_amount_to_rub_eur(coll_eur_transaction: dict) -> None:
     """Тестирование функции в нормальных условиях
     при получении евро операции"""
     with patch("requests.request") as mock_get:
@@ -24,7 +24,7 @@ def test_convert_amount_to_rub_eur(coll_eur_transaction: dict):
         mock_get.assert_called()
 
 
-def test_convert_amount_to_rub_bad_response(coll_eur_transaction: dict):
+def test_convert_amount_to_rub_bad_response(coll_eur_transaction: dict) -> None:
     """Тестирование функции при отказном результате запроса"""
     with patch("requests.request") as mock_get:
         mock_get.return_value.status_code = 400

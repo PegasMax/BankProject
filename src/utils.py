@@ -23,7 +23,6 @@ def get_transactions_from_json_file(path: str) -> list[dict]:
         with open(path) as file:
             try:
                 result_list = json.load(file)
-                print(result_list[1])
             except json.JSONDecodeError:
                 logger.error("Ошибка декодирования JSON формата.")
                 return []

@@ -6,7 +6,7 @@ from tests.conftest import call_transactions_list
 # Тестирование функции filter_by_currency
 
 
-def test_filter_by_currency_basic(call_transactions_list: dict):
+def test_filter_by_currency_basic(call_transactions_list: dict) -> None:
     """Проверка базового функционала"""
     assert (
         list(filter_by_currency(call_transactions_list["all_transactions"], "USD"))
@@ -19,12 +19,12 @@ def test_filter_by_currency_basic(call_transactions_list: dict):
     )
 
 
-def test_filter_by_currency_upset(call_transactions_list: dict):
+def test_filter_by_currency_upset(call_transactions_list: dict) -> None:
     """Проверка отработки ситуации когда требуемая валюта отсутствует"""
     assert list(filter_by_currency(call_transactions_list["all_transactions"], "EUR")) == []
 
 
-def test_filter_by_currency_empty_list():
+def test_filter_by_currency_empty_list() -> None:
     """Проверка отсутствия ошибки в случае получения на вход пустого списка"""
     assert list(filter_by_currency([], "RUB")) == []
 
@@ -32,7 +32,7 @@ def test_filter_by_currency_empty_list():
 # Тестирование функции transaction_descriptions
 
 
-def test_transaction_descriptions_basic(call_transactions_list: dict):
+def test_transaction_descriptions_basic(call_transactions_list: dict) -> None:
     """Проверка на то, что функция возвращает корректные описания для каждой транзакции"""
     assert (
         list(transaction_descriptions(call_transactions_list["all_transactions"]))
@@ -40,7 +40,7 @@ def test_transaction_descriptions_basic(call_transactions_list: dict):
     )
 
 
-def test_transaction_descriptions_empty():
+def test_transaction_descriptions_empty() -> None:
     """Проверка отработки функции при пустом списке во входных данных"""
     assert list(transaction_descriptions([])) == []
 
@@ -71,7 +71,7 @@ def test_transaction_descriptions_empty():
         (1, 2, ["0000 0000 0000 0001", "0000 0000 0000 0002"]),
     ],
 )
-def test_card_number_generator_basic(start_number, finish_number, expected_result):
+def test_card_number_generator_basic(start_number, finish_number, expected_result) -> None:
     """Проверка выдачи номеров в заданном диапазоне и корректности форматирования номеров карт"""
     assert list(card_number_generator(start_number, finish_number)) == expected_result
 
@@ -88,7 +88,7 @@ def test_card_number_generator_basic(start_number, finish_number, expected_resul
         (1, 1000000, "0000 0000 0000 0001", "0000 0000 0100 0000"),
     ],
 )
-def test_card_number_generator_extreme(start_number, finish_number, expected_first, expected_last):
+def test_card_number_generator_extreme(start_number, finish_number, expected_first, expected_last) -> None:
     """Проверка корректности крайних значений диапазона"""
     card_generator = card_number_generator(start_number, finish_number)
 
